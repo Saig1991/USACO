@@ -1,0 +1,10 @@
+The problem is specified in problem.txt in this folder.
+
+My solution (C++):
+Read in both the words.
+Use a string stream to break up the words into there constituent characters.
+Subtract the Ascii number for A from the letters (since all are capitols as specified in the spec) then add 1 to this number. (A = 1)
+Iterate through and multiply the numbers.
+Mod this number by 47.
+Check if the two numbers are equal.
+
