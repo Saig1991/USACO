@@ -1,0 +1,11 @@
+#input files
+*.in
+
+#output files
+*.out
+
+# Executables
+*.exe
+*.out
+*.app
+
