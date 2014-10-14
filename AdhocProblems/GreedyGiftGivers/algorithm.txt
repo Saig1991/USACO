@@ -1,0 +1,14 @@
+problem statement specified in the problem.txt
+
+My solution (C++):
+First run through the list of names, creating a map from name to number(starting from 0).i.e. in counting order
+initialise two array of 0s of length equivalent to the number of people in the group.
+one array will contain the inital money that each person had.
+the other will contain the final amount of money.
+iterate through the NP Groups of lines.
+Store the initial amount of money in the respectives persons spot(check the map) in the initial money array.
+For the person with the money, mod the money with the number of people it's divided by and add this number to the final money array.
+Then divide the money by the number of people and add this number to each persons final money array.
+Once you've iterated through all the people, output the difference between the final money array and the initial money array.
+
+
