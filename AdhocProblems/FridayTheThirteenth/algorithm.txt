@@ -1,0 +1,14 @@
+problem: specified in problem.txt
+
+solution:
+Given N, where N is the number of years from jan 1st 1900 that needs to be checked.
+represent each day of the week with a number (Sunday = 1, monday = 2, ...)
+Construct an array of size 7, with each index representing the number of occurences for each day on the 13th of the month.
+Start counting from 1/1/1900 using the rules provided to figure out the date.
+
+Rules being: 
+1/1/1900 => monday
+Sep, Apr, Jun, Nov => 30 days.
+Feb => 28/ 29 depending on leap year ( leap year being a yea divisible by 4 but not by 100(unless it's divisible by 400)
+
+Every time you reach the 13th of a month you increment the respective indice in the array.
