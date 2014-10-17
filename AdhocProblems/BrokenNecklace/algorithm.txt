@@ -3,10 +3,12 @@ problem: as specified in problem.txt
 algorithm:
 read in the input, store the length and the string.
 iterate through the string from left to right.
-have a counter,break variable, a max beads variable, max position variable.
+have a counter, a max beads variable, max position variable.
 as you iterate, count the number of contiguous same coloured beads (including white).
-When this ends, keep counting with the next colour, storing the break in the break variable.
-When you the next colours ends, check if the counter is greater than the current max beads variable.
-if it is store break in max position, store counter in max beads.
-Repeat the last 4 steps until you reach the end of the string.
+When this ends, keep counting with the next colour.
+When the next colours ends, check if the counter is greater than the current max beads variable.
+if it is store ,store counter in max beads.
+iterate back until you find the first opposite colour. if the previous condition was met, store this location in max_loc.    
+go back some more if the previous beads are white.
+Repeat the last 6 steps until you reach the end of the string.
 At this point you should have the maximum, output this.
