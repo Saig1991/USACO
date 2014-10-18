@@ -54,27 +54,27 @@ int necklace::numBeadsForward(std::string::iterator forwardIt, int numBackwardBe
         }
         backwardsEndPoint--;
     }
+    if(backwardsEndPoint != forwardIt){ 
+        do
+        {
+            if(prevBead == nonBead || prevBead == white) {
+                prevBead = *forwardIt;
+            }
 
-    
-    do
-    {
-        if(prevBead == nonBead || prevBead == white) {
-            prevBead = *forwardIt;
+            beadCount++;
+            forwardIt++;
+
+            if(forwardIt == this->beadsString.end()){
+                forwardIt = this->beadsString.begin();
+            }
+
+            //std::cout << "in forward loop " <<  forwardIt - beadsString.begin() << " " << *forwardIt << " " << prevBead << std::endl;
         }
-
-        beadCount++;
-        forwardIt++;
-
-        if(forwardIt == this->beadsString.end()){
-            forwardIt = this->beadsString.begin();
-        }
-
-        //std::cout << "in forward loop " <<  forwardIt - beadsString.begin() << " " << *forwardIt << " " << prevBead << std::endl;
-    }
-    //If forwardIT = backwardsEndPoint that means it's on the verge of crossing it.
-    while(((*forwardIt == prevBead) || (*forwardIt == white) || (prevBead == white)) && (forwardIt != backwardsEndPoint));
-    //std::cout << "exiting forward code " <<  beadCount<< " " <<  numBackwardBeads << std::endl;
-
+        //If forwardIT = backwardsEndPoint that means it's on the verge of crossing it.
+        while(((*forwardIt == prevBead) || (*forwardIt == white) || (prevBead == white))
+            && (forwardIt != backwardsEndPoint) && (beadCount < static_cast<int>(this->beadsString.size())));
+        //std::cout << "exiting forward code " <<  beadCount<< " " <<  numBackwardBeads << std::endl;
+    }   
     return beadCount;
 }
 
@@ -97,7 +97,8 @@ int necklace::numBeadsBackward(std::string::iterator backwardIt){
         beadCount++;
         backwardIt--;
     }
-    while((*backwardIt == prevBead) || (*backwardIt == white) || (prevBead == white));
+    while(((*backwardIt == prevBead) || (*backwardIt == white) || (prevBead == white)) 
+        && (beadCount < static_cast<int>(this->beadsString.size())));
     //std::cout << "exiting backward code " <<  beadCount<<  std::endl;
         
     return beadCount;
