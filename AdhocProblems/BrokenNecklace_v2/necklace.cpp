@@ -16,14 +16,22 @@ int necklace::numBeadsAtBreak(int position){
     int numBeads = 0;
 
     //Ensures the input is correct.i.e. you can't break the necklace at position that doesn't exist.
-    if(position < static_cast<int>(beadsString.size())){
+    if(position <= static_cast<int>(beadsString.size())){
         //iterate to the position of the break.
         for(int i = 1; i < position; i++){
             it++;
         }
 
+        //Need to start one behind for backwards.
+        std::string::iterator backwardsIt = it;
+        if(backwardsIt != beadsString.begin()){
+            backwardsIt--;
+        } else {
+            backwardsIt = beadsString.end();
+            backwardsIt--;
+        }
         //Utiliy functions that determine the number of continuous beads in both directions.
-        numBeads += numBeadsBackward(it);
+        numBeads += numBeadsBackward(backwardsIt);
         numBeads += numBeadsForward(it, numBeads);
 
 
@@ -35,9 +43,10 @@ int necklace::numBeadsAtBreak(int position){
 // Iterates forwards from the given position and counts the number of same coloured beads.
 // If the end is reached, it will cycle around to the start and continue.
 int necklace::numBeadsForward(std::string::iterator forwardIt, int numBackwardBeads){
-    char prevBead;
+    char prevBead = nonBead;
     int  beadCount = 0;
 
+    //Finds the point where the backwards beads ends. So if you cross this whilst going forward you're overlapping.
     std::string::iterator backwardsEndPoint = forwardIt;
     for(int i = 0; i < numBackwardBeads; i++){
         if(backwardsEndPoint == this->beadsString.begin()){
@@ -46,17 +55,25 @@ int necklace::numBeadsForward(std::string::iterator forwardIt, int numBackwardBe
         backwardsEndPoint--;
     }
 
+    
     do
     {
-        prevBead = *forwardIt;
+        if(prevBead == nonBead || prevBead == white) {
+            prevBead = *forwardIt;
+        }
+
         beadCount++;
         forwardIt++;
 
         if(forwardIt == this->beadsString.end()){
             forwardIt = this->beadsString.begin();
         }
+
+        //std::cout << "in forward loop " <<  forwardIt - beadsString.begin() << " " << *forwardIt << " " << prevBead << std::endl;
     }
-    while(((*forwardIt == prevBead) || (*forwardIt == white)) && (forwardIt < backwardsEndPoint));
+    //If forwardIT = backwardsEndPoint that means it's on the verge of crossing it.
+    while(((*forwardIt == prevBead) || (*forwardIt == white) || (prevBead == white)) && (forwardIt != backwardsEndPoint));
+    //std::cout << "exiting forward code " <<  beadCount<< " " <<  numBackwardBeads << std::endl;
 
     return beadCount;
 }
@@ -64,7 +81,7 @@ int necklace::numBeadsForward(std::string::iterator forwardIt, int numBackwardBe
 // Iterates backwards from the given position and counts the number of same coloured beads.
 // If the start is reached, it will cycle around to the end and continue.
 int necklace::numBeadsBackward(std::string::iterator backwardIt){
-    char prevBead;
+    char prevBead = nonBead;
     int  beadCount = 0;
 
     //Count the number of contiguous beads going backwards at the break.
@@ -74,11 +91,14 @@ int necklace::numBeadsBackward(std::string::iterator backwardIt){
             backwardIt = this->beadsString.end();
             backwardIt--;
         }
-        prevBead = *backwardIt;
+        if(prevBead == nonBead || prevBead == white) {
+            prevBead = *backwardIt;
+        }
         beadCount++;
         backwardIt--;
     }
-    while((*backwardIt == prevBead) || (*backwardIt == white));
+    while((*backwardIt == prevBead) || (*backwardIt == white) || (prevBead == white));
+    //std::cout << "exiting backward code " <<  beadCount<<  std::endl;
         
     return beadCount;
 }
@@ -88,8 +108,9 @@ This function returns the maximum number of contiguous beads possible for this n
 */
 int necklace::maxNumBeadsAtBreak(){
     int maxBeads = 0;
-    for(int i = 0; i < static_cast<int>(this->beadsString.size()); i++){
+    for(int i = 1; i < static_cast<int>(this->beadsString.size() + 1); i++){
         int curNumBeads = numBeadsAtBreak(i);
+        //std::cout << "max num beads fn " <<  i << " " << curNumBeads << std::endl;
         if( maxBeads < curNumBeads){
             maxBeads = curNumBeads;
         }
