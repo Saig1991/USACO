@@ -15,6 +15,7 @@ private:
     static const char white = 'w';
     static const char red = 'r';
     static const char blue = 'b';
+    static const char nonBead = 'a';
 
     //The main string that contains the necklact.
     std::string beadsString;
