@@ -1,0 +1,13 @@
+problem: specified in problem.txt
+
+My solution:
+-make a necklace class.
+
+-in the main program, read in the file, delegate the main work to the necklace class, place the output in a file.
+in the neckalce class:
+
+-represent the necklace as a string.
+
+-Have a function that given a position in the necklace finds the number of beads that can be collected(number of same coloured beads in both directions). This is done by iterating both ways from the break until you find the opposite colour (Excluding whites). If you read the end or the start of the string before you find a different colour you continue at the opposite end. N.B: depending on which direction you check first, you need to note down the positions of the beads that you've included so that you don't overlap.
+
+-Have a function that iterates through every position in the necklace and finds the maximum number of beads to be collected by iterating through the length of the necklace and calling the above function.
