@@ -1,0 +1,11 @@
+problem spec: the problem statement is specified in the problem.txt file.
+
+My solution:
+-Read in the times from the input file.
+-Create a new class "MilkingSchedule".
+-Give all the times to the milking schedule class.
+-Iterate through the pairs of times.
+-If the next pair has a start time before the end of the previous pair, add the difference between the ends to the current time counter.
+-Once you find a pair that the start time is after the previous pairs end time, compare the current time counter with the longest so far, if it's greater store it.
+-If the next pair has a start time after the end time, find the difference and compare it to your longest non-milking time counter, if it's greater store it.
+-Once done iterating, output the date to a file as specified in the problem statement.
