@@ -2,7 +2,7 @@
 #define MILKSCHEDULE
 
 #include <utility>
-#include <forward_list>
+#include <list>
 
 /*
 A class designed for the construction of a milking schedule
@@ -21,12 +21,10 @@ public:
     //Resets the schedule so that getNextTime() will return the first time.
     void resetSchedule();
 private:
-    //Need a size variable, since the forward list doesn't provide this option.
-    int listSize;
-    //Store the entries in a forward_list, 
-    std::forward_list<std::pair<int,int> > schedule;
+    //Store the entries in a list, 
+    std::list<std::pair<int,int> > schedule;
     //Iterator for returning the next time.
-    std::forward_list<std::pair<int,int> >::const_iterator next_time;
+    std::list<std::pair<int,int> >::const_iterator nextTime;
 };
 
 #endif 
