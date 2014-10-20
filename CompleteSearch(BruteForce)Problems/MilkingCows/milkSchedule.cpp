@@ -4,7 +4,7 @@
 Initialises the scheduling iterator.
 */
 milkSchedule::milkSchedule(){
-    this->nextTime = schedule.cbegin();
+    this->nextTime = this->schedule.begin();
 }
 
 /*
@@ -25,8 +25,8 @@ int milkSchedule::getNumTimes(){
 Returns the next pair of times in the list, increments the iterator to the next pair of times
 */
 std::pair<int,int> milkSchedule::getNextTime(){
-    std::pair<int,int> retVal = *nextTime;
     nextTime++;
+    std::pair<int,int> retVal = *nextTime;
     return retVal;
 }
 
@@ -34,5 +34,5 @@ std::pair<int,int> milkSchedule::getNextTime(){
 Resets the iterator, effectively reseting the schedule.
 */
 void milkSchedule::resetSchedule(){
-    nextTime = schedule.cbegin();
+    nextTime = schedule.begin();
 }
